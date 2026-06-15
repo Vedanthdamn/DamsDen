@@ -12,16 +12,16 @@ const fadeUp = (delay = 0) => ({
 });
 
 const STATS = [
-  { label: 'INSTITUTION', value: 'SRM Institute of Science and Technology, Kattankulathur' },
-  { label: 'CGPA', value: '8.60 / 10 — up to 3rd Semester' },
-  { label: 'INTERNSHIPS', value: 'NICSI · DMRC (with Deloitte) · DRDO (upcoming)' },
+  'SRMIST · AI & ML · 2028',
+  '8.60 CGPA',
+  'NICSI · DMRC/Deloitte · DRDO (upcoming)',
 ];
 
 const STATUS_ENTRIES = [
-  { status: 'Building CardMatch', sub: 'Indian credit card recommendation engine' },
-  { status: 'Exploring post-quantum cryptography', sub: 'DRDO research context' },
-  { status: 'Upcoming: DRDO Internship', sub: 'July 2026' },
-  { status: 'Based in Chennai during semester', sub: 'Delhi off-semester' },
+  { status: 'building CardMatch', sub: 'credit card recommendation for India' },
+  { status: 'reading about post-quantum cryptography', sub: 'DRDO context' },
+  { status: 'DRDO internship', sub: 'starting July 2026' },
+  { status: 'Chennai during semester, Delhi otherwise', sub: '' },
 ];
 
 export default function About() {
@@ -34,7 +34,7 @@ export default function About() {
       }}
     >
       <motion.div {...fadeUp(0)}>
-        <SectionLabel number="01" title="ABOUT" />
+        <SectionLabel title="about" />
       </motion.div>
 
       <div className="about-grid">
@@ -48,76 +48,37 @@ export default function About() {
               fontWeight: 300,
               color: '#E8EAF0',
               lineHeight: 1.25,
-              marginBottom: '32px',
               margin: '0 0 32px 0',
             }}
           >
-            Second-year engineer building at the intersection of AI, software, and systems.
+            I build things that work.
           </motion.h2>
 
           <motion.div {...fadeUp(0.2)} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <p
-              style={{
-                fontFamily: 'Inter, sans-serif',
-                fontSize: '15px',
-                color: 'rgba(232,234,240,0.55)',
-                lineHeight: 1.85,
-                margin: 0,
-              }}
-            >
-              B.Tech student in Computer Science (AI &amp; ML) at SRMIST, Kattankulathur. I build things
-              that are complete — full-stack applications, ML pipelines, and tools that make systems
-              faster and smarter.
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '15px', color: 'rgba(232,234,240,0.55)', lineHeight: 1.85, margin: 0 }}>
+              Second year at SRMIST, studying AI and ML. I spend most of my time
+              building — apps, tools, systems. I care more about whether something
+              works well than whether it looks impressive.
             </p>
-            <p
-              style={{
-                fontFamily: 'Inter, sans-serif',
-                fontSize: '15px',
-                color: 'rgba(232,234,240,0.55)',
-                lineHeight: 1.85,
-                margin: 0,
-              }}
-            >
-              Corporate Events Manager at Microsoft Student Ambassadors, SRMIST. Interned at NICSI
-              building conversational AI, and embedded with a Deloitte engineering team at DMRC on
-              enterprise GCP and Power BI infrastructure.
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '15px', color: 'rgba(232,234,240,0.55)', lineHeight: 1.85, margin: 0 }}>
+              Interned at NICSI building a government chatbot, and with a Deloitte
+              team at DMRC on GCP dashboards. Currently managing corporate events
+              for Microsoft Student Ambassadors at SRMIST. DRDO internship coming
+              up in July.
             </p>
           </motion.div>
 
           {/* Stat rows */}
           <motion.div {...fadeUp(0.3)} style={{ marginTop: '40px' }}>
-            {STATS.map(({ label, value }) => (
+            {STATS.map((value) => (
               <div
-                key={label}
+                key={value}
                 style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'flex-start',
-                  gap: '16px',
-                  padding: '16px 0',
+                  padding: '14px 0',
                   borderTop: '1px solid rgba(232,234,240,0.07)',
                 }}
               >
-                <span
-                  style={{
-                    fontFamily: 'JetBrains Mono, monospace',
-                    fontSize: '11px',
-                    color: 'rgba(232,234,240,0.25)',
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                    flexShrink: 0,
-                  }}
-                >
-                  {label}
-                </span>
-                <span
-                  style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '14px',
-                    color: 'rgba(232,234,240,0.75)',
-                    textAlign: 'right',
-                  }}
-                >
+                <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '14px', color: 'rgba(232,234,240,0.45)' }}>
                   {value}
                 </span>
               </div>
@@ -125,31 +86,19 @@ export default function About() {
           </motion.div>
 
           {/* Links */}
-          <motion.div
-            {...fadeUp(0.4)}
-            style={{ display: 'flex', gap: '24px', marginTop: '40px' }}
-          >
+          <motion.div {...fadeUp(0.4)} style={{ display: 'flex', gap: '24px', marginTop: '40px' }}>
             {[
-              {
-                label: 'Download Resume →',
-                href: 'https://drive.google.com/file/d/1ij1pB0yc3gjMjbB16xhhB1_2HXAMMTFP/view?usp=sharing',
-              },
-              { label: 'GitHub Profile →', href: 'https://github.com/Vedanthdamn' },
+              { label: 'resume', href: 'https://drive.google.com/file/d/1ij1pB0yc3gjMjbB16xhhB1_2HXAMMTFP/view?usp=sharing' },
+              { label: 'github', href: 'https://github.com/Vedanthdamn' },
             ].map(({ label, href }) => (
               <a
                 key={href}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: '13px',
-                  color: 'rgba(232,234,240,0.4)',
-                  textDecoration: 'none',
-                  transition: 'color 200ms ease',
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = 'rgba(232,234,240,0.9)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(232,234,240,0.4)'; }}
+                style={{ fontFamily: 'Inter, sans-serif', fontSize: '13px', color: 'rgba(232,234,240,0.35)', textDecoration: 'none', transition: 'color 200ms ease' }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = 'rgba(232,234,240,0.85)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(232,234,240,0.35)'; }}
               >
                 {label}
               </a>
@@ -159,71 +108,21 @@ export default function About() {
 
         {/* RIGHT COLUMN */}
         <motion.div {...fadeUp(0.2)}>
-          {/* Now card */}
-          <div
-            style={{
-              background: '#0C0C10',
-              border: '1px solid rgba(232,234,240,0.07)',
-              borderRadius: '4px',
-              padding: '32px',
-            }}
-          >
-            <div
-              style={{
-                fontFamily: 'JetBrains Mono, monospace',
-                fontSize: '10px',
-                color: 'rgba(232,234,240,0.2)',
-                letterSpacing: '0.3em',
-                borderBottom: '1px solid rgba(232,234,240,0.06)',
-                paddingBottom: '20px',
-                marginBottom: '24px',
-              }}
-            >
-              NOW
+          <div style={{ background: '#0C0C10', border: '1px solid rgba(232,234,240,0.07)', borderRadius: '4px', padding: '32px' }}>
+            <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '11px', color: 'rgba(232,234,240,0.2)', borderBottom: '1px solid rgba(232,234,240,0.06)', paddingBottom: '20px', marginBottom: '24px' }}>
+              now
             </div>
 
             {STATUS_ENTRIES.map(({ status, sub }, i) => (
-              <div
-                key={i}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '4px',
-                  padding: '14px 0',
-                  borderBottom: '1px solid rgba(232,234,240,0.05)',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <div
-                    style={{
-                      width: '5px',
-                      height: '5px',
-                      borderRadius: '50%',
-                      background: 'rgba(232,234,240,0.3)',
-                      flexShrink: 0,
-                    }}
-                  />
-                  <span
-                    style={{
-                      fontFamily: 'Inter, sans-serif',
-                      fontSize: '14px',
-                      color: 'rgba(232,234,240,0.6)',
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    {status}
-                  </span>
-                </div>
-                <span
-                  style={{
-                    fontFamily: 'JetBrains Mono, monospace',
-                    fontSize: '11px',
-                    color: 'rgba(232,234,240,0.2)',
-                    paddingLeft: '15px',
-                  }}
-                >
-                  {sub}
-                </span>
+              <div key={i} style={{ padding: '12px 0', borderBottom: '1px solid rgba(232,234,240,0.05)' }}>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '13px', color: 'rgba(232,234,240,0.55)', margin: '0 0 2px 0', lineHeight: 1.5 }}>
+                  {status}
+                </p>
+                {sub && (
+                  <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '12px', color: 'rgba(232,234,240,0.25)', margin: 0, lineHeight: 1.4 }}>
+                    {sub}
+                  </p>
+                )}
               </div>
             ))}
           </div>
@@ -240,11 +139,7 @@ export default function About() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                style={{
-                  color: 'rgba(232,234,240,0.25)',
-                  transition: 'color 200ms ease',
-                  display: 'flex',
-                }}
+                style={{ color: 'rgba(232,234,240,0.25)', transition: 'color 200ms ease', display: 'flex' }}
                 onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(232,234,240,0.8)'; }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(232,234,240,0.25)'; }}
               >

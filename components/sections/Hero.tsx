@@ -24,29 +24,15 @@ export default function Hero() {
         paddingRight: 'clamp(24px, 10vw, 10vw)',
       }}
     >
-      {/* Top label */}
-      <motion.p
-        {...fade(0)}
-        style={{
-          fontFamily: 'JetBrains Mono, monospace',
-          fontSize: '11px',
-          color: 'rgba(232,234,240,0.3)',
-          letterSpacing: '0.2em',
-          marginBottom: '32px',
-        }}
-      >
-        01 — PORTFOLIO
-      </motion.p>
-
       {/* Name */}
       <motion.h1
-        {...fade(0.3)}
+        {...fade(0)}
         style={{
           fontFamily: 'Cormorant Garamond, serif',
           fontSize: 'clamp(56px, 8vw, 96px)',
-          fontWeight: 300,
+          fontWeight: 400,
           color: '#E8EAF0',
-          letterSpacing: '-0.01em',
+          letterSpacing: 0,
           lineHeight: 1.1,
           margin: 0,
         }}
@@ -56,34 +42,23 @@ export default function Hero() {
 
       {/* Descriptor */}
       <motion.p
-        {...fade(0.6)}
+        {...fade(0.3)}
         style={{
           fontFamily: 'Inter, sans-serif',
-          fontSize: '15px',
+          fontSize: '16px',
+          fontWeight: 300,
           color: 'rgba(232,234,240,0.5)',
-          letterSpacing: '0.04em',
+          letterSpacing: 0,
           marginTop: '16px',
-          marginBottom: '8px',
+          marginBottom: 0,
         }}
       >
-        Engineer · Builder · Student of Systems
-      </motion.p>
-
-      {/* Detail */}
-      <motion.p
-        {...fade(0.8)}
-        style={{
-          fontFamily: 'JetBrains Mono, monospace',
-          fontSize: '12px',
-          color: 'rgba(232,234,240,0.25)',
-        }}
-      >
-        B.Tech CSE (AI &amp; ML) · SRMIST · Class of 2028
+        I build things that work.
       </motion.p>
 
       {/* Rule */}
       <motion.div
-        {...fade(1.0)}
+        {...fade(0.6)}
         style={{
           width: '48px',
           height: '1px',
@@ -95,8 +70,8 @@ export default function Hero() {
 
       {/* CTA links */}
       <motion.div
-        {...fade(1.2)}
-        style={{ display: 'flex', gap: '28px', alignItems: 'center' }}
+        {...fade(0.75)}
+        style={{ display: 'flex', gap: '20px', alignItems: 'center' }}
       >
         <button
           onClick={() => triggerCurtain('/projects')}
@@ -107,14 +82,14 @@ export default function Hero() {
             padding: 0,
             fontFamily: 'Inter, sans-serif',
             fontSize: '13px',
-            color: 'rgba(232,234,240,0.45)',
-            letterSpacing: '0.02em',
+            color: 'rgba(232,234,240,0.35)',
+            letterSpacing: 0,
             transition: 'color 200ms ease',
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.color = 'rgba(232,234,240,0.9)'; }}
-          onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(232,234,240,0.45)'; }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = 'rgba(232,234,240,0.85)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(232,234,240,0.35)'; }}
         >
-          View Work ↓
+          work
         </button>
 
         <a
@@ -124,47 +99,28 @@ export default function Hero() {
           style={{
             fontFamily: 'Inter, sans-serif',
             fontSize: '13px',
-            color: 'rgba(232,234,240,0.45)',
-            letterSpacing: '0.02em',
+            color: 'rgba(232,234,240,0.35)',
+            letterSpacing: 0,
             textDecoration: 'none',
             transition: 'color 200ms ease',
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.color = 'rgba(232,234,240,0.9)'; }}
-          onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(232,234,240,0.45)'; }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = 'rgba(232,234,240,0.85)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(232,234,240,0.35)'; }}
         >
-          Resume →
+          resume
         </a>
       </motion.div>
 
       {/* Bottom-right status — desktop only */}
       <div
         className="hidden md:block"
-        style={{
-          position: 'absolute',
-          bottom: '40px',
-          right: '48px',
-          textAlign: 'right',
-        }}
+        style={{ position: 'absolute', bottom: '40px', right: '48px', textAlign: 'right' }}
       >
-        <p
-          style={{
-            fontFamily: 'JetBrains Mono, monospace',
-            fontSize: '10px',
-            color: 'rgba(232,234,240,0.2)',
-            lineHeight: 1.6,
-          }}
-        >
-          New Delhi, India
+        <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '11px', color: 'rgba(232,234,240,0.2)', lineHeight: 1.6, margin: 0 }}>
+          India
         </p>
-        <p
-          style={{
-            fontFamily: 'JetBrains Mono, monospace',
-            fontSize: '10px',
-            color: 'rgba(232,234,240,0.2)',
-            lineHeight: 1.6,
-          }}
-        >
-          Available for internships
+        <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '11px', color: 'rgba(232,234,240,0.2)', lineHeight: 1.6, margin: 0 }}>
+          open to work
         </p>
       </div>
     </section>

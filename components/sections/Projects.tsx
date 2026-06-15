@@ -13,27 +13,6 @@ const fadeUp = (delay = 0) => ({
   transition: { duration: 0.6, delay, ease: 'easeOut' },
 });
 
-function StatusBadge({ status }: { status: ProjectItem['status'] }) {
-  const isShipped = status === 'Shipped';
-  return (
-    <span
-      style={{
-        display: 'inline-block',
-        marginTop: '6px',
-        padding: '2px 8px',
-        fontFamily: 'JetBrains Mono, monospace',
-        fontSize: '9px',
-        letterSpacing: '0.1em',
-        borderRadius: '2px',
-        background: isShipped ? 'rgba(232,234,240,0.15)' : 'rgba(200,180,80,0.1)',
-        color: isShipped ? 'rgba(232,234,240,0.5)' : 'rgba(200,180,80,0.5)',
-      }}
-    >
-      {status.toUpperCase()}
-    </span>
-  );
-}
-
 function ProjectRow({ project, delay }: { project: ProjectItem; delay: number }) {
   const [hovered, setHovered] = useState(false);
 
@@ -50,26 +29,8 @@ function ProjectRow({ project, delay }: { project: ProjectItem; delay: number })
       }}
     >
       {/* Desktop layout */}
-      <div
-        className="project-row-desktop"
-        style={{ padding: '32px 0', display: 'none' }}
-      >
-        {/* Col 1: year + status */}
-        <div style={{ paddingTop: '2px' }}>
-          <p
-            style={{
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: '11px',
-              color: 'rgba(232,234,240,0.25)',
-              margin: 0,
-            }}
-          >
-            {project.year}
-          </p>
-          <StatusBadge status={project.status} />
-        </div>
-
-        {/* Col 2: main content */}
+      <div className="project-row-desktop" style={{ padding: '32px 0', display: 'none' }}>
+        {/* Main content */}
         <div>
           <p
             style={{
@@ -77,7 +38,7 @@ function ProjectRow({ project, delay }: { project: ProjectItem; delay: number })
               fontSize: '26px',
               color: hovered ? 'rgba(232,234,240,1)' : 'rgba(232,234,240,0.9)',
               fontWeight: 400,
-              margin: '0 0 4px 0',
+              margin: '0 0 2px 0',
               transition: 'color 200ms ease',
               lineHeight: 1.2,
             }}
@@ -87,9 +48,18 @@ function ProjectRow({ project, delay }: { project: ProjectItem; delay: number })
           <p
             style={{
               fontFamily: 'Inter, sans-serif',
+              fontSize: '11px',
+              color: 'rgba(232,234,240,0.2)',
+              margin: '0 0 10px 0',
+            }}
+          >
+            {project.status === 'Shipped' ? 'shipped' : 'in development'}
+          </p>
+          <p
+            style={{
+              fontFamily: 'Inter, sans-serif',
               fontSize: '13px',
               color: 'rgba(232,234,240,0.35)',
-              fontStyle: 'italic',
               margin: '0 0 12px 0',
             }}
           >
@@ -119,41 +89,17 @@ function ProjectRow({ project, delay }: { project: ProjectItem; delay: number })
           </AnimatePresence>
         </div>
 
-        {/* Col 3: tags + link */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            alignItems: 'flex-end',
-          }}
-        >
-          <ul style={{ listStyle: 'none', margin: 0, padding: 0, textAlign: 'right' }}>
-            {project.tags.map((tag) => (
-              <li
-                key={tag}
-                style={{
-                  fontFamily: 'JetBrains Mono, monospace',
-                  fontSize: '11px',
-                  color: 'rgba(232,234,240,0.25)',
-                  lineHeight: 2,
-                }}
-              >
-                {tag}
-              </li>
-            ))}
-          </ul>
+        {/* Tags + link */}
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+          <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '12px', color: 'rgba(232,234,240,0.25)', margin: 0, textAlign: 'right', lineHeight: 1.6 }}>
+            {project.tags.join(', ')}
+          </p>
           <a
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`GitHub — ${project.title}`}
-            style={{
-              color: 'rgba(232,234,240,0.25)',
-              transition: 'color 200ms ease',
-              display: 'flex',
-              marginTop: '12px',
-            }}
+            style={{ color: 'rgba(232,234,240,0.25)', transition: 'color 200ms ease', display: 'flex', marginTop: '12px' }}
             onMouseEnter={(e) => { e.currentTarget.style.color = 'rgba(232,234,240,0.8)'; }}
             onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(232,234,240,0.25)'; }}
           >
@@ -163,65 +109,28 @@ function ProjectRow({ project, delay }: { project: ProjectItem; delay: number })
       </div>
 
       {/* Mobile layout */}
-      <div
-        className="project-row-mobile"
-        style={{ padding: '28px 0' }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-          <span
-            style={{
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: '10px',
-              color: 'rgba(232,234,240,0.25)',
-            }}
-          >
-            {project.year}
-          </span>
-          <StatusBadge status={project.status} />
-        </div>
-
+      <div className="project-row-mobile" style={{ padding: '28px 0' }}>
         <p
           style={{
             fontFamily: 'Cormorant Garamond, serif',
             fontSize: '24px',
             color: 'rgba(232,234,240,0.9)',
             fontWeight: 400,
-            margin: '0 0 4px 0',
+            margin: '0 0 2px 0',
             lineHeight: 1.2,
           }}
         >
           {project.title}
         </p>
-        <p
-          style={{
-            fontFamily: 'Inter, sans-serif',
-            fontSize: '13px',
-            color: 'rgba(232,234,240,0.35)',
-            fontStyle: 'italic',
-            margin: '0 0 12px 0',
-          }}
-        >
+        <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '11px', color: 'rgba(232,234,240,0.2)', margin: '0 0 8px 0' }}>
+          {project.status === 'Shipped' ? 'shipped' : 'in development'}
+        </p>
+        <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '13px', color: 'rgba(232,234,240,0.35)', margin: '0 0 12px 0' }}>
           {project.tagline}
         </p>
-
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '12px' }}>
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              style={{
-                fontFamily: 'JetBrains Mono, monospace',
-                fontSize: '10px',
-                color: 'rgba(232,234,240,0.3)',
-                background: 'rgba(232,234,240,0.05)',
-                padding: '3px 8px',
-                borderRadius: '2px',
-              }}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
+        <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '12px', color: 'rgba(232,234,240,0.25)', margin: '0 0 12px 0' }}>
+          {project.tags.join(', ')}
+        </p>
         <a
           href={project.githubUrl}
           target="_blank"
@@ -246,27 +155,26 @@ export default function Projects() {
       }}
     >
       <motion.div {...fadeUp(0)}>
-        <SectionLabel number="03" title="PROJECTS" />
+        <SectionLabel title="projects" />
       </motion.div>
 
       <motion.h2
         {...fadeUp(0.08)}
         style={{
           fontFamily: 'Cormorant Garamond, serif',
-          fontSize: '38px',
+          fontSize: '42px',
           fontWeight: 300,
           color: 'rgba(232,234,240,0.9)',
           margin: '0 0 48px 0',
         }}
       >
-        Things I&apos;ve built.
+        Work.
       </motion.h2>
 
       <div>
         {projects.map((project, i) => (
           <ProjectRow key={project.id} project={project} delay={0.1 + i * 0.06} />
         ))}
-        {/* Final bottom border */}
         <div style={{ borderTop: '1px solid rgba(232,234,240,0.07)' }} />
       </div>
     </section>

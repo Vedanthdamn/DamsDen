@@ -8,11 +8,11 @@ import { useCurtainContext } from '@/context/CurtainContext';
 import SoundToggle from '@/components/ui/SoundToggle';
 
 const NAV_LINKS = [
-  { label: 'About', href: '/about' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Experience', href: '/experience' },
-  { label: 'Skills', href: '/skills' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'about', href: '/about' },
+  { label: 'projects', href: '/projects' },
+  { label: 'experience', href: '/experience' },
+  { label: 'skills', href: '/skills' },
+  { label: 'contact', href: '/contact' },
 ];
 
 export default function Navbar() {
@@ -58,43 +58,27 @@ export default function Navbar() {
           paddingRight: 'clamp(24px, 4vw, 48px)',
         }}
       >
-        {/* Signature mark */}
+        {/* Name */}
         <button
           onClick={() => handleNav('/')}
-          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left' }}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
         >
-          <div
-            style={{
-              fontFamily: 'Cinzel, serif',
-              fontSize: '12px',
-              letterSpacing: '0.25em',
-              color: 'rgba(232,234,240,0.9)',
-              fontWeight: 400,
-              lineHeight: 1.3,
-            }}
-          >
-            VEDANTH DAMA
-          </div>
-          <div
+          <span
             style={{
               fontFamily: 'Cormorant Garamond, serif',
-              fontSize: '13px',
-              fontStyle: 'italic',
-              letterSpacing: '0.08em',
-              color: 'rgba(232,234,240,0.35)',
-              fontWeight: 300,
-              lineHeight: 1.3,
+              fontSize: '18px',
+              fontWeight: 400,
+              fontStyle: 'normal',
+              color: 'rgba(232,234,240,0.85)',
+              letterSpacing: 0,
             }}
           >
-            Vedanth Damae
-          </div>
+            Vedanth
+          </span>
         </button>
 
         {/* Desktop nav */}
-        <div
-          className="hidden md:flex"
-          style={{ alignItems: 'center', gap: '32px' }}
-        >
+        <div className="hidden md:flex" style={{ alignItems: 'center', gap: '28px' }}>
           {NAV_LINKS.map(({ label, href }) => {
             const isActive = pathname === href;
             return (
@@ -107,18 +91,17 @@ export default function Navbar() {
                   cursor: 'pointer',
                   padding: 0,
                   fontFamily: 'Inter, sans-serif',
-                  fontSize: '12px',
-                  letterSpacing: '0.08em',
-                  color: isActive
-                    ? 'rgba(232,234,240,0.9)'
-                    : 'rgba(232,234,240,0.45)',
+                  fontSize: '13px',
+                  fontWeight: 400,
+                  letterSpacing: 0,
+                  color: isActive ? 'rgba(232,234,240,0.85)' : 'rgba(232,234,240,0.4)',
                   transition: 'color 200ms ease',
                 }}
                 onMouseEnter={(e) => {
-                  if (!isActive) (e.currentTarget as HTMLButtonElement).style.color = 'rgba(232,234,240,0.9)';
+                  if (!isActive) (e.currentTarget as HTMLButtonElement).style.color = 'rgba(232,234,240,0.85)';
                 }}
                 onMouseLeave={(e) => {
-                  if (!isActive) (e.currentTarget as HTMLButtonElement).style.color = 'rgba(232,234,240,0.45)';
+                  if (!isActive) (e.currentTarget as HTMLButtonElement).style.color = 'rgba(232,234,240,0.4)';
                 }}
               >
                 {label}
@@ -126,17 +109,7 @@ export default function Navbar() {
             );
           })}
 
-          {/* Divider */}
-          <div
-            style={{
-              width: '1px',
-              height: '16px',
-              background: 'rgba(232,234,240,0.1)',
-              margin: '0 16px',
-              flexShrink: 0,
-            }}
-          />
-
+          <div style={{ width: '24px' }} />
           <SoundToggle />
         </div>
 
@@ -144,13 +117,7 @@ export default function Navbar() {
         <button
           className="flex md:hidden"
           onClick={() => setMobileOpen(true)}
-          style={{
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            padding: 0,
-            color: 'rgba(232,234,240,0.6)',
-          }}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: 'rgba(232,234,240,0.6)' }}
           aria-label="Open menu"
         >
           <IconMenu2 size={20} />
@@ -176,7 +143,6 @@ export default function Navbar() {
               alignItems: 'center',
             }}
           >
-            {/* Close button */}
             <button
               onClick={() => setMobileOpen(false)}
               style={{
@@ -194,7 +160,6 @@ export default function Navbar() {
               <IconX size={20} />
             </button>
 
-            {/* Staggered links */}
             <nav style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px' }}>
               {NAV_LINKS.map(({ label, href }, i) => (
                 <motion.button
@@ -208,11 +173,11 @@ export default function Navbar() {
                     border: 'none',
                     cursor: 'pointer',
                     padding: 0,
-                    fontFamily: 'Cormorant Garamond, serif',
-                    fontSize: '32px',
-                    fontWeight: 300,
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: '22px',
+                    fontWeight: 400,
                     color: 'rgba(232,234,240,0.7)',
-                    letterSpacing: '0.04em',
+                    letterSpacing: 0,
                   }}
                 >
                   {label}

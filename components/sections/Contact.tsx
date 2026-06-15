@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { IconArrowUpRight, IconCheck } from '@tabler/icons-react';
+import { IconCheck } from '@tabler/icons-react';
 import SectionLabel from '@/components/ui/SectionLabel';
 
 const fadeUp = (delay = 0) => ({
@@ -40,39 +40,18 @@ function ContactRow({
       }}
     >
       <div>
-        <p
-          style={{
-            fontFamily: 'JetBrains Mono, monospace',
-            fontSize: '11px',
-            color: 'rgba(232,234,240,0.25)',
-            letterSpacing: '0.15em',
-            margin: '0 0 6px 0',
-          }}
-        >
+        <p style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '11px', color: 'rgba(232,234,240,0.25)', letterSpacing: '0.05em', margin: '0 0 6px 0' }}>
           {method}
         </p>
-        <p
-          style={{
-            fontFamily: 'Cormorant Garamond, serif',
-            fontSize: '20px',
-            color: hovered ? 'rgba(232,234,240,1)' : 'rgba(232,234,240,0.7)',
-            fontWeight: 400,
-            margin: 0,
-            transition: 'color 200ms ease',
-          }}
-        >
+        <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '20px', color: hovered ? 'rgba(232,234,240,1)' : 'rgba(232,234,240,0.7)', fontWeight: 400, margin: 0, transition: 'color 200ms ease' }}>
           {value}
         </p>
       </div>
-      <div
-        style={{
-          color: hovered ? 'rgba(232,234,240,0.7)' : 'rgba(232,234,240,0.2)',
-          transition: 'color 200ms ease',
-          display: 'flex',
-        }}
-      >
-        {copied ? <IconCheck size={16} /> : <IconArrowUpRight size={16} />}
-      </div>
+      {copied && (
+        <div style={{ color: 'rgba(232,234,240,0.4)', display: 'flex' }}>
+          <IconCheck size={16} />
+        </div>
+      )}
     </div>
   );
 
@@ -130,63 +109,40 @@ export default function Contact() {
       }}
     >
       <motion.div {...fadeUp(0)}>
-        <SectionLabel number="06" title="CONTACT" />
+        <SectionLabel title="contact" />
       </motion.div>
 
       <motion.h2
         {...fadeUp(0.08)}
         style={{
           fontFamily: 'Cormorant Garamond, serif',
-          fontSize: '48px',
+          fontSize: '42px',
           fontWeight: 300,
           color: 'rgba(232,234,240,0.9)',
           margin: '0 0 16px 0',
           lineHeight: 1.15,
         }}
       >
-        Let&apos;s build something.
+        Get in touch.
       </motion.h2>
 
       <motion.p
         {...fadeUp(0.16)}
-        style={{
-          fontFamily: 'Inter, sans-serif',
-          fontSize: '16px',
-          color: 'rgba(232,234,240,0.4)',
-          margin: '0 0 64px 0',
-        }}
+        style={{ fontFamily: 'Inter, sans-serif', fontSize: '15px', color: 'rgba(232,234,240,0.4)', margin: '0 0 64px 0' }}
       >
-        Open to internships, research collaborations, and interesting problems.
+        Open to internships and interesting problems. I reply.
       </motion.p>
 
-      {/* Contact entries */}
       <motion.div {...fadeUp(0.24)}>
-        <ContactRow
-          method="EMAIL"
-          value="damavedanth@gmail.com"
-          onClick={handleCopyEmail}
-          copied={copied}
-        />
-        <ContactRow
-          method="LINKEDIN"
-          value="vedanth-dama"
-          href="https://www.linkedin.com/in/vedanth-dama"
-        />
-        <ContactRow
-          method="GITHUB"
-          value="Vedanthdamn"
-          href="https://github.com/Vedanthdamn"
-        />
+        <ContactRow method="email" value="damavedanth@gmail.com" onClick={handleCopyEmail} copied={copied} />
+        <ContactRow method="linkedin" value="vedanth-dama" href="https://www.linkedin.com/in/vedanth-dama" />
+        <ContactRow method="github" value="Vedanthdamn" href="https://github.com/Vedanthdamn" />
         <div style={{ borderTop: '1px solid rgba(232,234,240,0.07)' }} />
       </motion.div>
 
-      {/* Resume block */}
       <ResumeBlock />
 
-      {/* Spacer pushes footer to bottom */}
       <div style={{ flexGrow: 1 }} />
-
-      {/* Footer */}
       <Footer />
     </section>
   );
@@ -220,28 +176,9 @@ function ResumeBlock() {
         gap: '16px',
       }}
     >
-      <div>
-        <p
-          style={{
-            fontFamily: 'Inter, sans-serif',
-            fontSize: '14px',
-            color: 'rgba(232,234,240,0.55)',
-            margin: '0 0 4px 0',
-          }}
-        >
-          Vedanth Dama — Résumé
-        </p>
-        <p
-          style={{
-            fontFamily: 'JetBrains Mono, monospace',
-            fontSize: '11px',
-            color: 'rgba(232,234,240,0.2)',
-            margin: 0,
-          }}
-        >
-          B.Tech CSE (AI &amp; ML) · SRMIST · 2028
-        </p>
-      </div>
+      <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '14px', color: 'rgba(232,234,240,0.4)' }}>
+        résumé
+      </span>
       <span
         style={{
           fontFamily: 'Inter, sans-serif',
@@ -252,7 +189,7 @@ function ResumeBlock() {
           flexShrink: 0,
         }}
       >
-        Download PDF →
+        open →
       </span>
     </motion.a>
   );
@@ -278,24 +215,11 @@ function Footer() {
           paddingTop: '24px',
         }}
       >
-        <span
-          style={{
-            fontFamily: 'Cinzel, serif',
-            fontSize: '11px',
-            color: 'rgba(232,234,240,0.2)',
-            letterSpacing: '0.1em',
-          }}
-        >
-          Vedanth Dama
+        <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '12px', color: 'rgba(232,234,240,0.15)' }}>
+          Vedanth Dama · 2025
         </span>
-        <span
-          style={{
-            fontFamily: 'JetBrains Mono, monospace',
-            fontSize: '10px',
-            color: 'rgba(232,234,240,0.15)',
-          }}
-        >
-          Built with Next.js · Framer Motion · Tailwind · Claude Code
+        <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '12px', color: 'rgba(232,234,240,0.15)' }}>
+          not built for ATS
         </span>
       </div>
     </motion.footer>

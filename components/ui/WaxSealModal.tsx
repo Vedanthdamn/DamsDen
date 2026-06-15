@@ -65,52 +65,19 @@ export default function WaxSealModal({ open, onClose }: WaxSealModalProps) {
                   justifyContent: 'center',
                 }}
               >
-                <span
-                  style={{
-                    fontFamily: 'Cinzel, serif',
-                    fontSize: '16px',
-                    color: 'rgba(232,234,240,0.4)',
-                    letterSpacing: '0.05em',
-                  }}
-                >
+                <span style={{ fontFamily: 'Cinzel, serif', fontSize: '16px', color: 'rgba(232,234,240,0.4)', letterSpacing: '0.05em' }}>
                   VD
                 </span>
               </motion.div>
             </div>
 
-            <p
-              style={{
-                fontFamily: 'Cormorant Garamond, serif',
-                fontSize: '24px',
-                fontWeight: 300,
-                color: 'rgba(232,234,240,0.85)',
-                margin: 0,
-                lineHeight: 1.3,
-              }}
-            >
-              This chamber is not yet open.
+            <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '24px', fontWeight: 300, color: 'rgba(232,234,240,0.85)', margin: 0, lineHeight: 1.3 }}>
+              Not yet.
             </p>
 
-            <p
-              style={{
-                fontFamily: 'Inter, sans-serif',
-                fontSize: '14px',
-                color: 'rgba(232,234,240,0.4)',
-                lineHeight: 1.7,
-                margin: '16px 0 0 0',
-              }}
-            >
-              The digital twin is under construction. Return when it is ready to speak.
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '14px', color: 'rgba(232,234,240,0.4)', lineHeight: 1.7, margin: '16px 0 28px 0' }}>
+              The digital twin is being built. Come back later.
             </p>
-
-            <div
-              style={{
-                width: '32px',
-                height: '1px',
-                background: 'rgba(232,234,240,0.1)',
-                margin: '28px auto',
-              }}
-            />
 
             <CloseButton onClose={onClose} />
           </motion.div>
@@ -128,18 +95,18 @@ function CloseButton({ onClose }: { onClose: () => void }) {
         background: 'none',
         border: 'none',
         cursor: 'pointer',
-        fontFamily: 'JetBrains Mono, monospace',
-        fontSize: '11px',
-        color: 'rgba(232,234,240,0.25)',
-        letterSpacing: '0.15em',
-        textTransform: 'uppercase',
+        fontFamily: 'Inter, sans-serif',
+        fontSize: '18px',
+        color: 'rgba(232,234,240,0.3)',
         transition: 'color 200ms ease',
-        padding: '4px 0',
+        padding: '4px 8px',
+        lineHeight: 1,
       }}
       onMouseEnter={(e) => { e.currentTarget.style.color = 'rgba(232,234,240,0.7)'; }}
-      onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(232,234,240,0.25)'; }}
+      onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(232,234,240,0.3)'; }}
+      aria-label="Close"
     >
-      close
+      ×
     </button>
   );
 }

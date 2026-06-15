@@ -103,7 +103,7 @@ body {
 @media (min-width: 768px) {
   .project-row-desktop {
     display: grid !important;
-    grid-template-columns: 80px 1fr 200px;
+    grid-template-columns: 1fr 200px;
     gap: 40px;
     align-items: start;
   }

@@ -79,7 +79,7 @@ export default function HowThisWasMade() {
       }}
     >
       <motion.div {...fadeUp(0)}>
-        <SectionLabel number="07" title="HOW THIS WAS MADE" />
+        <SectionLabel title="how this was made" />
       </motion.div>
 
       <motion.h2
@@ -110,7 +110,7 @@ export default function HowThisWasMade() {
 
       {/* A — PALETTE */}
       <motion.div {...fadeUp(0.24)} style={{ marginBottom: '64px' }}>
-        <SectionLabel2 label="PALETTE" />
+        <SectionLabel2 label="palette" />
         <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
           {PALETTE.map(({ color, name, hex, border }) => (
             <div key={name} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -155,7 +155,7 @@ export default function HowThisWasMade() {
 
       {/* B — TYPOGRAPHY */}
       <motion.div {...fadeUp(0.32)} style={{ marginBottom: '64px' }}>
-        <SectionLabel2 label="TYPOGRAPHY" />
+        <SectionLabel2 label="typography" />
         <div>
           {/* Cormorant */}
           <div style={{ padding: '24px 0', borderTop: '1px solid rgba(232,234,240,0.07)' }}>
@@ -240,7 +240,7 @@ export default function HowThisWasMade() {
 
       {/* C — STACK */}
       <motion.div {...fadeUp(0.40)} style={{ marginBottom: '64px' }}>
-        <SectionLabel2 label="BUILT WITH" />
+        <SectionLabel2 label="built with" />
         <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
           {STACK.map((item) => (
             <li
@@ -260,7 +260,7 @@ export default function HowThisWasMade() {
 
       {/* D — PRINCIPLES */}
       <motion.div {...fadeUp(0.48)}>
-        <SectionLabel2 label="PRINCIPLES" />
+        <SectionLabel2 label="principles" />
         <div>
           {PRINCIPLES.map(({ num, name, body }, i) => (
             <motion.div
