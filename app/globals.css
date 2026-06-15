@@ -51,6 +51,117 @@ body {
   background: rgba(232, 234, 240, 0.3);
 }
 
+/* About two-column grid: 55/45 on desktop, single column on mobile */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 64px;
+}
+
+@media (min-width: 768px) {
+  .about-grid {
+    grid-template-columns: 55fr 45fr;
+    gap: 80px;
+  }
+}
+
+/* Skills: 3-col desktop, 1-col mobile, 1px gap */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+}
+
+@media (min-width: 768px) {
+  .skills-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Education: 2-col desktop, 1-col mobile */
+.education-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+@media (min-width: 768px) {
+  .education-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 64px;
+  }
+}
+
+/* Projects: desktop 3-col row layout */
+.project-row-desktop {
+  display: none;
+}
+.project-row-mobile {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .project-row-desktop {
+    display: grid !important;
+    grid-template-columns: 80px 1fr 200px;
+    gap: 40px;
+    align-items: start;
+  }
+  .project-row-mobile {
+    display: none !important;
+  }
+}
+
+/* Experience: desktop 2-col [160px / auto], mobile stacked */
+.exp-row-desktop {
+  display: none;
+}
+.exp-row-mobile {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .exp-row-desktop {
+    display: grid !important;
+    grid-template-columns: 160px 1fr;
+    gap: 48px;
+    padding: 40px 0;
+    align-items: start;
+  }
+  .exp-row-mobile {
+    display: none !important;
+  }
+}
+
+/* Upcoming pulse dot */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+.pulse-dot {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Beyond the Code: hide domain/icon column on mobile */
+.btc-left {
+  display: none !important;
+}
+
+@media (min-width: 768px) {
+  .btc-left {
+    display: flex !important;
+  }
+}
+
+/* Digital Twin pulse ring */
+@keyframes dtPulse {
+  0% { box-shadow: 0 0 0 0 rgba(232,234,240,0.15); }
+  100% { box-shadow: 0 0 0 8px rgba(232,234,240,0); }
+}
+.dt-pulse {
+  animation: dtPulse 3s ease-out infinite;
+}
+
 /* Fade-in utility */
 .fade-in {
   opacity: 0;
