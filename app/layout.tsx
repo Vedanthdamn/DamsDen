@@ -56,16 +56,14 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={fontVars}>
-      <body className="bg-void text-silver">
+      <body className="bg-void text-silver noise">
         <SoundProvider>
           <CurtainProvider>
-            <div className="noise">
-              <Navbar />
-              <main>{children}</main>
-              <CurtainTransition />
-              <DigitalTwin />
-              <CursorGlow />
-            </div>
+            <Navbar />
+            <main>{children}</main>
+            <CurtainTransition />
+            <DigitalTwin />
+            <CursorGlow />
           </CurtainProvider>
         </SoundProvider>
       </body>
