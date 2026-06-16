@@ -24,6 +24,23 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Ensure all page content sits above the star field canvas (z-index 0) */
+main {
+  position: relative;
+  z-index: 1;
+}
+
+nav {
+  position: relative;
+  z-index: 50;
+}
+
+/* Make sections transparent so star field shows through.
+   Section background is on body (#050508); stars render beneath. */
+section {
+  background: transparent !important;
+}
+
 /* Space-grain noise texture */
 .noise::before {
   content: '';

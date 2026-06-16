@@ -7,6 +7,7 @@ import Navbar from '@/components/layout/Navbar';
 import CurtainTransition from '@/components/layout/CurtainTransition';
 import DigitalTwin from '@/components/ui/DigitalTwin';
 import CursorGlow from '@/components/ui/CursorGlow';
+import StarField from '@/components/ui/StarField';
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -59,6 +60,7 @@ export default function RootLayout({
       <body className="bg-void text-silver noise">
         <SoundProvider>
           <CurtainProvider>
+            <StarField />
             <Navbar />
             <main>{children}</main>
             <CurtainTransition />
