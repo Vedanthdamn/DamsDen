@@ -13,13 +13,6 @@ const fadeUp = (delay = 0) => ({
 
 const MAX_CHARS = 2000;
 
-// ─── SETUP REQUIRED ───────────────────────────────────────────────────────────
-// 1. Go to https://formspree.io and create a free account
-// 2. Create a new form → set email to damavedanth@gmail.com
-// 3. Copy the form ID (looks like "xrgvabcd") and paste it below
-const FORMSPREE_ID = 'YOUR_FORM_ID';
-// ──────────────────────────────────────────────────────────────────────────────
-
 type FormState = 'idle' | 'sending' | 'sent' | 'error';
 
 const inputBase: React.CSSProperties = {
@@ -48,16 +41,12 @@ export default function Contact() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!name.trim() || !email.trim() || !message.trim()) return;
-    if (FORMSPREE_ID === 'YOUR_FORM_ID') {
-      alert('Contact form not yet configured. Email damavedanth@gmail.com directly.');
-      return;
-    }
 
     setFormState('sending');
     try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const res = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, message }),
       });
       if (res.ok) {
