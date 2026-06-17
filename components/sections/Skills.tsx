@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import SectionLabel from '@/components/ui/SectionLabel';
 
@@ -8,21 +7,44 @@ const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 12 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
-  transition: { duration: 0.7, delay, ease: 'easeOut' },
+  transition: { duration: 0.6, delay, ease: 'easeOut' },
 });
 
 const SKILL_GROUPS = [
   {
     name: 'ai & ml',
-    skills: 'Python, PyTorch, Scikit-learn, NLP, Physics-Informed Neural Networks, computer vision, federated learning, C++',
+    skills: [
+      { label: 'Python', pct: 88 },
+      { label: 'Scikit-learn', pct: 80 },
+      { label: 'PyTorch', pct: 74 },
+      { label: 'Computer Vision', pct: 68 },
+      { label: 'NLP', pct: 65 },
+      { label: 'C++', pct: 60 },
+      { label: 'Federated Learning', pct: 52 },
+    ],
   },
   {
     name: 'software',
-    skills: 'React, TypeScript, Next.js, Java, Spring Boot, FastAPI, PostgreSQL, Supabase, MySQL',
+    skills: [
+      { label: 'React', pct: 85 },
+      { label: 'TypeScript', pct: 80 },
+      { label: 'PostgreSQL / MySQL', pct: 75 },
+      { label: 'Next.js', pct: 72 },
+      { label: 'FastAPI', pct: 72 },
+      { label: 'Java / Spring Boot', pct: 65 },
+      { label: 'Supabase', pct: 62 },
+    ],
   },
   {
     name: 'tools & infra',
-    skills: 'Git, Google Cloud Platform, BigQuery, Power BI, Docker, Linux, Figma',
+    skills: [
+      { label: 'Git', pct: 90 },
+      { label: 'Linux', pct: 72 },
+      { label: 'Google Cloud / BigQuery', pct: 68 },
+      { label: 'Docker', pct: 65 },
+      { label: 'Power BI', pct: 62 },
+      { label: 'Figma', pct: 58 },
+    ],
   },
 ];
 
@@ -37,27 +59,78 @@ const EDUCATION = [
   },
 ];
 
-function SkillCard({ group, delay }: { group: typeof SKILL_GROUPS[0]; delay: number }) {
-  const [hovered, setHovered] = useState(false);
+function SkillBar({ label, pct, delay }: { label: string; pct: number; delay: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay }}
+      style={{ marginBottom: '18px' }}
+    >
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+        <span
+          style={{
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '12px',
+            color: 'rgba(232,234,240,0.55)',
+          }}
+        >
+          {label}
+        </span>
+        <span
+          style={{
+            fontFamily: 'JetBrains Mono, monospace',
+            fontSize: '10px',
+            color: 'rgba(232,234,240,0.25)',
+          }}
+        >
+          {pct}%
+        </span>
+      </div>
+      {/* Track */}
+      <div
+        style={{
+          height: '3px',
+          background: 'rgba(232,234,240,0.06)',
+          borderRadius: '999px',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Fill */}
+        <motion.div
+          initial={{ width: 0 }}
+          whileInView={{ width: `${pct}%` }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: delay + 0.1, ease: 'easeOut' }}
+          style={{
+            height: '100%',
+            background: 'linear-gradient(90deg, rgba(232,234,240,0.5) 0%, rgba(232,234,240,0.2) 100%)',
+            borderRadius: '999px',
+          }}
+        />
+      </div>
+    </motion.div>
+  );
+}
 
+function SkillCard({ group, delay }: { group: typeof SKILL_GROUPS[0]; delay: number }) {
   return (
     <motion.div
       {...fadeUp(delay)}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       style={{
         background: '#0C0C10',
-        padding: '32px',
-        borderRadius: 0,
-        border: `1px solid ${hovered ? 'rgba(232,234,240,0.15)' : 'rgba(232,234,240,0.06)'}`,
-        transition: 'border-color 300ms ease',
+        padding: '28px 28px 12px',
+        border: '1px solid rgba(232,234,240,0.06)',
       }}
     >
       <p
         style={{
           fontFamily: 'Inter, sans-serif',
-          fontSize: '12px',
-          color: 'rgba(232,234,240,0.3)',
+          fontSize: '11px',
+          letterSpacing: '0.10em',
+          color: 'rgba(232,234,240,0.28)',
+          textTransform: 'uppercase',
           paddingBottom: '20px',
           borderBottom: '1px solid rgba(232,234,240,0.06)',
           marginBottom: '24px',
@@ -66,17 +139,9 @@ function SkillCard({ group, delay }: { group: typeof SKILL_GROUPS[0]; delay: num
       >
         {group.name}
       </p>
-      <p
-        style={{
-          fontFamily: 'Inter, sans-serif',
-          fontSize: '14px',
-          color: 'rgba(232,234,240,0.5)',
-          lineHeight: 1.8,
-          margin: 0,
-        }}
-      >
-        {group.skills}
-      </p>
+      {group.skills.map((s, i) => (
+        <SkillBar key={s.label} label={s.label} pct={s.pct} delay={delay + i * 0.05} />
+      ))}
     </motion.div>
   );
 }
@@ -86,7 +151,6 @@ export default function Skills() {
     <section
       style={{
         minHeight: '100vh',
-        background: '#050508',
         padding: 'clamp(100px, 12vw, 140px) clamp(24px, 10vw, 10vw) clamp(60px, 8vw, 80px)',
       }}
     >

@@ -1,40 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-import { useCurtainContext } from '@/context/CurtainContext';
-
-const NAV_LINKS = [
-  { label: 'how this was made', href: '/how-this-was-made' },
-  { label: 'beyond the code', href: '/beyond-the-code' },
-  { label: 'contact', href: '/contact' },
-];
-
-function FooterLink({ label, href }: { label: string; href: string }) {
-  const { triggerCurtain } = useCurtainContext();
-  const [hovered, setHovered] = useState(false);
-  return (
-    <button
-      onClick={() => triggerCurtain(href)}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        background: 'none',
-        border: 'none',
-        cursor: 'pointer',
-        padding: 0,
-        fontFamily: 'Inter, sans-serif',
-        fontSize: '13px',
-        color: hovered ? 'rgba(232,234,240,0.75)' : 'rgba(232,234,240,0.35)',
-        transition: 'color 200ms ease',
-        textDecoration: hovered ? 'underline' : 'none',
-        textUnderlineOffset: '3px',
-      }}
-    >
-      {label} →
-    </button>
-  );
-}
-
 export default function Footer() {
   return (
     <footer
@@ -68,7 +33,7 @@ export default function Footer() {
           Vedanth Dama
         </span>
 
-        <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
           {[
             { label: 'GitHub', href: 'https://github.com/Vedanthdamn' },
             { label: 'LinkedIn', href: 'https://www.linkedin.com/in/vedanth-dama' },
@@ -100,44 +65,12 @@ export default function Footer() {
         style={{
           fontFamily: 'Inter, sans-serif',
           fontSize: '13px',
-          color: 'rgba(232,234,240,0.25)',
-          margin: '0 0 16px 0',
+          color: 'rgba(232,234,240,0.2)',
+          margin: 0,
         }}
       >
         Not built for bots or ATS. Built for people.
       </p>
-
-      {/* Bottom row: build note + nav links */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '6px',
-          rowGap: '8px',
-        }}
-      >
-        <span
-          style={{
-            fontFamily: 'Inter, sans-serif',
-            fontSize: '13px',
-            color: 'rgba(232,234,240,0.2)',
-          }}
-        >
-          Built with deliberate attention to detail.
-        </span>
-
-        <span style={{ color: 'rgba(232,234,240,0.12)', margin: '0 4px' }}>·</span>
-
-        {NAV_LINKS.map((link, i) => (
-          <span key={link.href} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <FooterLink label={link.label} href={link.href} />
-            {i < NAV_LINKS.length - 1 && (
-              <span style={{ color: 'rgba(232,234,240,0.12)' }}>·</span>
-            )}
-          </span>
-        ))}
-      </div>
     </footer>
   );
 }

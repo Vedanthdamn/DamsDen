@@ -6,46 +6,27 @@ import { IconBrandGithub, IconExternalLink } from '@tabler/icons-react';
 import SectionLabel from '@/components/ui/SectionLabel';
 import { projects, type ProjectItem } from '@/lib/projects';
 
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 20 },
+const bounceUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 48 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.55, delay, ease: 'easeOut' },
+  exit: { opacity: 0, y: 48 },
+  viewport: { once: false, margin: '-60px' },
+  transition: { type: 'spring', stiffness: 260, damping: 22, delay },
 });
 
-function StatusPill({ status }: { status: ProjectItem['status'] }) {
-  const isShipped = status === 'Shipped';
+function StatusLabel({ status }: { status: ProjectItem['status'] }) {
   return (
     <span
       style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: '5px',
-        padding: '3px 10px',
-        borderRadius: '999px',
         fontFamily: 'Inter, sans-serif',
-        fontSize: '10px',
-        fontWeight: 500,
-        letterSpacing: '0.06em',
-        background: isShipped
-          ? 'rgba(120,220,150,0.15)'
-          : 'rgba(200,180,80,0.15)',
-        color: isShipped
-          ? 'rgba(120,220,150,0.9)'
-          : 'rgba(200,180,80,0.9)',
-        border: `1px solid ${isShipped ? 'rgba(120,220,150,0.3)' : 'rgba(200,180,80,0.3)'}`,
+        fontSize: '11px',
+        fontWeight: 400,
+        letterSpacing: '0.08em',
+        color: 'rgba(232,234,240,0.35)',
+        textTransform: 'uppercase',
       }}
     >
-      <span
-        style={{
-          width: '5px',
-          height: '5px',
-          borderRadius: '50%',
-          background: isShipped ? 'rgba(120,220,150,0.9)' : 'rgba(200,180,80,0.9)',
-          flexShrink: 0,
-        }}
-      />
-      {isShipped ? 'Shipped' : 'In Dev'}
+      {status === 'Shipped' ? 'Shipped' : 'In Dev'}
     </span>
   );
 }
@@ -67,7 +48,7 @@ function ProjectCard({ project, delay }: { project: ProjectItem; delay: number }
 
   return (
     <motion.div
-      {...fadeUp(delay)}
+      {...bounceUp(delay)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onMouseMove={handleMouseMove}
@@ -129,7 +110,7 @@ function ProjectCard({ project, delay }: { project: ProjectItem; delay: number }
       <div style={{ position: 'relative', zIndex: 1 }}>
         {/* Header row */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
-          <StatusPill status={project.status} />
+          <StatusLabel status={project.status} />
           <span
             style={{
               fontFamily: 'JetBrains Mono, monospace',
@@ -291,12 +272,18 @@ export default function Projects() {
         padding: 'clamp(100px, 12vw, 140px) clamp(24px, 10vw, 10vw) clamp(60px, 8vw, 80px)',
       }}
     >
-      <motion.div {...fadeUp(0)}>
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+      >
         <SectionLabel title="projects" />
       </motion.div>
 
       <motion.h2
-        {...fadeUp(0.08)}
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.08, ease: 'easeOut' }}
         style={{
           fontFamily: 'Cormorant Garamond, serif',
           fontSize: '42px',

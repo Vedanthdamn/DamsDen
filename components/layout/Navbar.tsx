@@ -16,18 +16,12 @@ const NAV_LINKS = [
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const { triggerCurtain } = useCurtainContext();
 
-  useEffect(() => {
-    function onScroll() {
-      setScrolled(window.scrollY > 80);
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  useEffect(() => { setMounted(true); }, []);
 
   function handleNav(href: string) {
     setMobileOpen(false);
@@ -36,29 +30,165 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Desktop pill */}
       <nav
+        className="hidden md:flex"
         style={{
           position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '64px',
+          top: '18px',
+          left: '50%',
+          transform: 'translateX(-50%)',
           zIndex: 50,
-          display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between',
-          transition: 'background 300ms ease, border-color 300ms ease',
-          background: scrolled ? 'rgba(5,5,8,0.85)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(12px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
-          borderBottom: scrolled
-            ? '1px solid rgba(232,234,240,0.06)'
-            : '1px solid transparent',
-          paddingLeft: 'clamp(24px, 4vw, 48px)',
-          paddingRight: 'clamp(24px, 4vw, 48px)',
+          gap: '0',
+          height: '46px',
+          padding: '0 6px',
+          borderRadius: '999px',
+          background: 'rgba(8, 8, 14, 0.62)',
+          backdropFilter: 'blur(28px) saturate(160%)',
+          WebkitBackdropFilter: 'blur(28px) saturate(160%)',
+          border: '1px solid rgba(232,234,240,0.13)',
+          borderTop: '1px solid rgba(232,234,240,0.28)',
+          boxShadow:
+            '0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(232,234,240,0.10)',
+          whiteSpace: 'nowrap',
         }}
       >
+        {/* Specular top highlight */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: '10%',
+            right: '10%',
+            height: '1px',
+            background:
+              'linear-gradient(90deg, transparent 0%, rgba(232,234,240,0.35) 40%, rgba(232,234,240,0.35) 60%, transparent 100%)',
+            borderRadius: '999px',
+            pointerEvents: 'none',
+          }}
+        />
+
         {/* Name */}
+        <button
+          onClick={() => handleNav('/')}
+          style={{
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            padding: '0 14px',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <span
+            style={{
+              fontFamily: 'Cormorant Garamond, serif',
+              fontSize: '17px',
+              fontWeight: 400,
+              color: 'rgba(232,234,240,0.85)',
+              letterSpacing: '-0.01em',
+            }}
+          >
+            Vedanth
+          </span>
+        </button>
+
+        {/* Divider */}
+        <span
+          style={{
+            width: '1px',
+            height: '18px',
+            background: 'rgba(232,234,240,0.12)',
+            flexShrink: 0,
+            margin: '0 4px',
+          }}
+        />
+
+        {/* Links */}
+        {NAV_LINKS.map(({ label, href }) => {
+          const isActive = mounted && pathname === href;
+          return (
+            <button
+              key={href}
+              onClick={() => handleNav(href)}
+              style={{
+                background: isActive ? 'rgba(232,234,240,0.10)' : 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '0 14px',
+                height: '34px',
+                borderRadius: '999px',
+                margin: '0 1px',
+                display: 'flex',
+                alignItems: 'center',
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '13px',
+                fontWeight: 400,
+                letterSpacing: '0',
+                color: isActive ? 'rgba(232,234,240,0.90)' : 'rgba(232,234,240,0.42)',
+                transition: 'color 200ms ease, background 200ms ease',
+              }}
+              onMouseEnter={(e) => {
+                if (!isActive) {
+                  (e.currentTarget as HTMLButtonElement).style.color = 'rgba(232,234,240,0.80)';
+                  (e.currentTarget as HTMLButtonElement).style.background = 'rgba(232,234,240,0.06)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive) {
+                  (e.currentTarget as HTMLButtonElement).style.color = 'rgba(232,234,240,0.42)';
+                  (e.currentTarget as HTMLButtonElement).style.background = 'none';
+                }
+              }}
+            >
+              {label}
+            </button>
+          );
+        })}
+
+        {/* Divider */}
+        <span
+          style={{
+            width: '1px',
+            height: '18px',
+            background: 'rgba(232,234,240,0.12)',
+            flexShrink: 0,
+            margin: '0 4px',
+          }}
+        />
+
+        {/* Sound */}
+        <div style={{ padding: '0 10px', display: 'flex', alignItems: 'center' }}>
+          <SoundToggle />
+        </div>
+      </nav>
+
+      {/* Mobile pill */}
+      <nav
+        className="flex md:hidden"
+        style={{
+          position: 'fixed',
+          top: '14px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 50,
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          height: '44px',
+          padding: '0 8px 0 16px',
+          borderRadius: '999px',
+          background: 'rgba(8, 8, 14, 0.65)',
+          backdropFilter: 'blur(24px) saturate(160%)',
+          WebkitBackdropFilter: 'blur(24px) saturate(160%)',
+          border: '1px solid rgba(232,234,240,0.13)',
+          borderTop: '1px solid rgba(232,234,240,0.26)',
+          boxShadow: '0 6px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(232,234,240,0.08)',
+          minWidth: '200px',
+          gap: '16px',
+        }}
+      >
         <button
           onClick={() => handleNav('/')}
           style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
@@ -66,61 +196,30 @@ export default function Navbar() {
           <span
             style={{
               fontFamily: 'Cormorant Garamond, serif',
-              fontSize: '18px',
+              fontSize: '17px',
               fontWeight: 400,
-              fontStyle: 'normal',
               color: 'rgba(232,234,240,0.85)',
-              letterSpacing: 0,
             }}
           >
             Vedanth
           </span>
         </button>
 
-        {/* Desktop nav */}
-        <div className="hidden md:flex" style={{ alignItems: 'center', gap: '28px' }}>
-          {NAV_LINKS.map(({ label, href }) => {
-            const isActive = pathname === href;
-            return (
-              <button
-                key={href}
-                onClick={() => handleNav(href)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  padding: 0,
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: '13px',
-                  fontWeight: 400,
-                  letterSpacing: 0,
-                  color: isActive ? 'rgba(232,234,240,0.85)' : 'rgba(232,234,240,0.4)',
-                  transition: 'color 200ms ease',
-                }}
-                onMouseEnter={(e) => {
-                  if (!isActive) (e.currentTarget as HTMLButtonElement).style.color = 'rgba(232,234,240,0.85)';
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive) (e.currentTarget as HTMLButtonElement).style.color = 'rgba(232,234,240,0.4)';
-                }}
-              >
-                {label}
-              </button>
-            );
-          })}
-
-          <div style={{ width: '24px' }} />
-          <SoundToggle />
-        </div>
-
-        {/* Mobile hamburger */}
         <button
-          className="flex md:hidden"
           onClick={() => setMobileOpen(true)}
-          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: 'rgba(232,234,240,0.6)' }}
+          style={{
+            background: 'rgba(232,234,240,0.08)',
+            border: '1px solid rgba(232,234,240,0.12)',
+            borderRadius: '999px',
+            cursor: 'pointer',
+            padding: '6px 10px',
+            color: 'rgba(232,234,240,0.65)',
+            display: 'flex',
+            alignItems: 'center',
+          }}
           aria-label="Open menu"
         >
-          <IconMenu2 size={20} />
+          <IconMenu2 size={16} />
         </button>
       </nav>
 
@@ -136,7 +235,8 @@ export default function Navbar() {
               position: 'fixed',
               inset: 0,
               zIndex: 80,
-              background: '#050508',
+              background: 'rgba(5,5,8,0.96)',
+              backdropFilter: 'blur(16px)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
@@ -149,15 +249,18 @@ export default function Navbar() {
                 position: 'absolute',
                 top: '20px',
                 right: 'clamp(24px, 4vw, 48px)',
-                background: 'none',
-                border: 'none',
+                background: 'rgba(232,234,240,0.08)',
+                border: '1px solid rgba(232,234,240,0.12)',
+                borderRadius: '999px',
                 cursor: 'pointer',
                 color: 'rgba(232,234,240,0.6)',
-                padding: 0,
+                padding: '8px',
+                display: 'flex',
+                alignItems: 'center',
               }}
               aria-label="Close menu"
             >
-              <IconX size={20} />
+              <IconX size={16} />
             </button>
 
             <nav style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px' }}>
@@ -176,7 +279,7 @@ export default function Navbar() {
                     fontFamily: 'Inter, sans-serif',
                     fontSize: '22px',
                     fontWeight: 400,
-                    color: 'rgba(232,234,240,0.7)',
+                    color: mounted && pathname === href ? 'rgba(232,234,240,0.90)' : 'rgba(232,234,240,0.55)',
                     letterSpacing: 0,
                   }}
                 >
