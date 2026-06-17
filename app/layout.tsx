@@ -5,6 +5,7 @@ import { SoundProvider } from '@/context/SoundContext';
 import { CurtainProvider } from '@/context/CurtainContext';
 import Navbar from '@/components/layout/Navbar';
 import CurtainTransition from '@/components/layout/CurtainTransition';
+import Footer from '@/components/layout/Footer';
 import DigitalTwin from '@/components/ui/DigitalTwin';
 import CursorGlow from '@/components/ui/CursorGlow';
 import StarField from '@/components/ui/StarField';
@@ -63,6 +64,7 @@ export default function RootLayout({
             <StarField />
             <Navbar />
             <main>{children}</main>
+            <Footer />
             <CurtainTransition />
             <DigitalTwin />
             <CursorGlow />

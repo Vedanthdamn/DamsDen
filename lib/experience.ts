@@ -37,19 +37,6 @@ export const experiences: ExperienceItem[] = [
     ],
   },
   {
-    id: 'msa',
-    org: 'Microsoft Student Ambassadors, SRMIST',
-    role: 'Corporate Events Manager',
-    location: 'Chennai',
-    period: 'Oct 2025 – Present',
-    type: 'Leadership',
-    bullets: [
-      'Manage logistics, vendor communications, and budget for large-scale campus events.',
-      'Design and implement engagement themes and event concepts cross-functionally.',
-      'Coordinate student engagement activities for the SRMIST chapter.',
-    ],
-  },
-  {
     id: 'nicsi',
     org: 'National Informatics Centre Services Inc.',
     role: 'Technical Intern',
