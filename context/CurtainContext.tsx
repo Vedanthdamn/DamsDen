@@ -16,12 +16,10 @@ export function CurtainProvider({ children }: { children: React.ReactNode }) {
 
   function triggerCurtain(href: string) {
     setIsAnimating(true);
-    setTimeout(() => {
-      router.push(href);
-      setTimeout(() => {
-        setIsAnimating(false);
-      }, 350);
-    }, 350);
+    // Navigate once curtain is fully covering (450ms)
+    // Keep isAnimating true long enough for CurtainTransition to drive its own sequence
+    setTimeout(() => router.push(href), 450);
+    setTimeout(() => setIsAnimating(false), 500);
   }
 
   return (
