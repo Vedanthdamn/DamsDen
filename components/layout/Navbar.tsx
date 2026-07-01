@@ -8,11 +8,11 @@ import { useCurtainContext } from '@/context/CurtainContext';
 import SoundToggle from '@/components/ui/SoundToggle';
 
 const NAV_LINKS = [
-  { label: 'about', href: '/about' },
-  { label: 'projects', href: '/projects' },
+  { label: 'about',      href: '/about' },
+  { label: 'projects',   href: '/projects' },
   { label: 'experience', href: '/experience' },
-  { label: 'skills', href: '/skills' },
-  { label: 'contact', href: '/contact' },
+  { label: 'skills',     href: '/skills' },
+  { label: 'contact',    href: '/contact' },
 ];
 
 export default function Navbar() {
@@ -30,7 +30,37 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Desktop pill */}
+      {/* SVG water-glass filter — animated turbulence displacement */}
+      <svg style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}>
+        <defs>
+          <filter id="nav-liquid" x="-8%" y="-40%" width="116%" height="180%">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.016 0.038"
+              numOctaves="3"
+              seed="5"
+              result="noise"
+            >
+              {/* @ts-ignore — SVG SMIL animate; repeatCount="indefinite" is valid */}
+              <animate
+                attributeName="baseFrequency"
+                values="0.016 0.038;0.021 0.050;0.017 0.036;0.013 0.043;0.016 0.038"
+                dur="14s"
+                repeatCount="indefinite"
+              />
+            </feTurbulence>
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="noise"
+              scale="2.4"
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
+          </filter>
+        </defs>
+      </svg>
+
+      {/* ── Desktop pill ── */}
       <nav
         className="hidden md:flex"
         style={{
@@ -44,17 +74,19 @@ export default function Navbar() {
           height: '46px',
           padding: '0 6px',
           borderRadius: '999px',
-          background: 'rgba(8, 8, 14, 0.62)',
-          backdropFilter: 'blur(28px) saturate(160%)',
-          WebkitBackdropFilter: 'blur(28px) saturate(160%)',
+          background: 'rgba(8, 8, 14, 0.58)',
+          backdropFilter: 'blur(32px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(32px) saturate(180%)',
           border: '1px solid rgba(232,234,240,0.13)',
           borderTop: '1px solid rgba(232,234,240,0.28)',
           boxShadow:
             '0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(232,234,240,0.10)',
           whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          filter: 'url(#nav-liquid)',
         }}
       >
-        {/* Specular top highlight */}
+        {/* Specular top edge */}
         <div
           style={{
             position: 'absolute',
@@ -66,6 +98,43 @@ export default function Navbar() {
               'linear-gradient(90deg, transparent 0%, rgba(232,234,240,0.35) 40%, rgba(232,234,240,0.35) 60%, transparent 100%)',
             borderRadius: '999px',
             pointerEvents: 'none',
+            zIndex: 2,
+          }}
+        />
+
+        {/* Moving water-light caustic */}
+        <motion.div
+          animate={{ x: ['-120px', '560px', '-120px'] }}
+          transition={{ duration: 11, repeat: Infinity, ease: [0.4, 0, 0.6, 1] }}
+          style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            width: '80px',
+            background:
+              'linear-gradient(90deg, transparent, rgba(232,234,240,0.05) 30%, rgba(232,234,240,0.11) 50%, rgba(232,234,240,0.05) 70%, transparent)',
+            transform: 'skewX(-12deg)',
+            filter: 'blur(3px)',
+            pointerEvents: 'none',
+            zIndex: 1,
+          }}
+        />
+
+        {/* Secondary slower caustic */}
+        <motion.div
+          animate={{ x: ['560px', '-120px', '560px'] }}
+          transition={{ duration: 17, repeat: Infinity, ease: [0.4, 0, 0.6, 1] }}
+          style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            width: '40px',
+            background:
+              'linear-gradient(90deg, transparent, rgba(232,234,240,0.04) 40%, rgba(232,234,240,0.08) 50%, rgba(232,234,240,0.04) 60%, transparent)',
+            transform: 'skewX(-8deg)',
+            filter: 'blur(5px)',
+            pointerEvents: 'none',
+            zIndex: 1,
           }}
         />
 
@@ -80,6 +149,8 @@ export default function Navbar() {
             height: '100%',
             display: 'flex',
             alignItems: 'center',
+            position: 'relative',
+            zIndex: 3,
           }}
         >
           <span
@@ -103,10 +174,12 @@ export default function Navbar() {
             background: 'rgba(232,234,240,0.12)',
             flexShrink: 0,
             margin: '0 4px',
+            position: 'relative',
+            zIndex: 3,
           }}
         />
 
-        {/* Links */}
+        {/* Nav links */}
         {NAV_LINKS.map(({ label, href }) => {
           const isActive = mounted && pathname === href;
           return (
@@ -126,9 +199,10 @@ export default function Navbar() {
                 fontFamily: 'Inter, sans-serif',
                 fontSize: '13px',
                 fontWeight: 400,
-                letterSpacing: '0',
                 color: isActive ? 'rgba(232,234,240,0.90)' : 'rgba(232,234,240,0.42)',
                 transition: 'color 200ms ease, background 200ms ease',
+                position: 'relative',
+                zIndex: 3,
               }}
               onMouseEnter={(e) => {
                 if (!isActive) {
@@ -156,16 +230,18 @@ export default function Navbar() {
             background: 'rgba(232,234,240,0.12)',
             flexShrink: 0,
             margin: '0 4px',
+            position: 'relative',
+            zIndex: 3,
           }}
         />
 
-        {/* Sound */}
-        <div style={{ padding: '0 10px', display: 'flex', alignItems: 'center' }}>
+        {/* Sound toggle */}
+        <div style={{ padding: '0 10px', display: 'flex', alignItems: 'center', position: 'relative', zIndex: 3 }}>
           <SoundToggle />
         </div>
       </nav>
 
-      {/* Mobile pill */}
+      {/* ── Mobile pill ── */}
       <nav
         className="flex md:hidden"
         style={{
@@ -179,19 +255,38 @@ export default function Navbar() {
           height: '44px',
           padding: '0 8px 0 16px',
           borderRadius: '999px',
-          background: 'rgba(8, 8, 14, 0.65)',
-          backdropFilter: 'blur(24px) saturate(160%)',
-          WebkitBackdropFilter: 'blur(24px) saturate(160%)',
+          background: 'rgba(8, 8, 14, 0.60)',
+          backdropFilter: 'blur(28px) saturate(175%)',
+          WebkitBackdropFilter: 'blur(28px) saturate(175%)',
           border: '1px solid rgba(232,234,240,0.13)',
           borderTop: '1px solid rgba(232,234,240,0.26)',
           boxShadow: '0 6px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(232,234,240,0.08)',
           minWidth: '200px',
           gap: '16px',
+          overflow: 'hidden',
+          filter: 'url(#nav-liquid)',
         }}
       >
+        {/* Mobile caustic */}
+        <motion.div
+          animate={{ x: ['-80px', '320px', '-80px'] }}
+          transition={{ duration: 13, repeat: Infinity, ease: [0.4, 0, 0.6, 1] }}
+          style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            width: '50px',
+            background:
+              'linear-gradient(90deg, transparent, rgba(232,234,240,0.07) 40%, rgba(232,234,240,0.10) 50%, rgba(232,234,240,0.07) 60%, transparent)',
+            transform: 'skewX(-12deg)',
+            filter: 'blur(3px)',
+            pointerEvents: 'none',
+          }}
+        />
+
         <button
           onClick={() => handleNav('/')}
-          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, position: 'relative', zIndex: 2 }}
         >
           <span
             style={{
@@ -216,6 +311,8 @@ export default function Navbar() {
             color: 'rgba(232,234,240,0.65)',
             display: 'flex',
             alignItems: 'center',
+            position: 'relative',
+            zIndex: 2,
           }}
           aria-label="Open menu"
         >
@@ -223,7 +320,7 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile overlay */}
+      {/* ── Mobile overlay ── */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -280,7 +377,6 @@ export default function Navbar() {
                     fontSize: '22px',
                     fontWeight: 400,
                     color: mounted && pathname === href ? 'rgba(232,234,240,0.90)' : 'rgba(232,234,240,0.55)',
-                    letterSpacing: 0,
                   }}
                 >
                   {label}
