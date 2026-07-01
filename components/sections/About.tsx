@@ -11,12 +11,6 @@ const fadeUp = (delay = 0) => ({
   transition: { duration: 0.7, delay, ease: 'easeOut' },
 });
 
-const STATS = [
-  'SRMIST · AI & ML · 2028',
-  '8.60 CGPA',
-  'NICSI · DMRC/Deloitte · DRDO (upcoming)',
-];
-
 const STATUS_ENTRIES = [
   { status: 'building CardMatch', sub: 'credit card recommender for India' },
   { status: 'reading post-quantum cryptography', sub: 'DRDO prep' },
@@ -28,22 +22,26 @@ const INTERESTS = [
   {
     tag: 'money stuff',
     title: 'Personal Finance',
-    body: `Started because I wanted to pay less tax. Stayed because the math is genuinely interesting. XIRR, indexation, SWP, HRA exemptions — I study this the way most people study for exams, except this one actually pays out. The goal is simple: earn more, spend intentionally, and retire before 40. Or at least understand what that would take.`,
+    emoji: '🪙',
+    body: `Started because I wanted to pay less tax. Stayed because the math is genuinely interesting. XIRR, indexation, SWP, HRA exemptions. I study this the way most people study for exams, except this one actually pays out. The goal is simple: earn more, spend intentionally, and retire before 40. Or at least understand what that would take.`,
   },
   {
     tag: 'points game',
     title: 'Credit Cards',
-    body: `I have a spreadsheet mapping every card's reward category to every type of spend I make. Is that normal? Probably not. Do I care? Absolutely not — because I flew business class on points last year. The strategy: milk sign-up bonuses, stack reward categories, never pay interest, and travel for almost free. Credit card nerd, zero regrets.`,
+    emoji: '💳',
+    body: `I have a spreadsheet mapping every card's reward category to every type of spend I make. Is that normal? Probably not. Do I care? Absolutely not. I flew business class on points last year. The strategy: milk sign-up bonuses, stack reward categories, never pay interest, and travel for almost free. Credit card nerd, zero regrets.`,
   },
   {
     tag: '3am alarms',
     title: 'Football · Barça',
-    body: `I watch every single Barcelona game no matter the kick-off time, time zone, or what I have at 8am the next day. Miss a lecture? Fine. Miss a Barça game? Absolutely not. I have watched them crash out of the UCL enough times to understand genuine heartbreak. Still setting the alarm. Still believing. The trophy is coming — I'm just not sure which decade.`,
+    emoji: '⚽',
+    body: `I watch every single Barcelona game no matter the kickoff time, time zone, or what I have at 8am the next day. Miss a lecture? Fine. Miss a Barça game? Absolutely not. I have watched them crash out of the UCL enough times to understand genuine heartbreak. Still setting the alarm. Still believing. The trophy is coming. Not sure which decade, but it is coming.`,
   },
   {
     tag: 'covid trade',
     title: 'Stock Market',
-    body: `Started investing in Class 10 during COVID because I had time, a Zerodha account, and ₹2000 that felt very important. Accidentally became a long-term investor by simply not knowing when to sell. Now I actually understand what P/E means, why free cash flow matters, and why timing the market is a myth I once believed. Portfolio > CGPA.`,
+    emoji: '📈',
+    body: `Started during COVID using my mom's account and her money, placing trades with very little knowledge and way too much confidence. Made profits. Made losses. Made more losses. Eventually flipped it around. Accidentally became a long-term investor by simply not knowing when to sell. Now I actually understand what P/E means, why free cash flow matters, and why timing the market is a myth. Portfolio > CGPA.`,
   },
 ];
 
@@ -79,7 +77,7 @@ export default function About() {
 
           <motion.div {...fadeUp(0.2)} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '15px', color: 'rgba(232,234,240,0.55)', lineHeight: 1.85, margin: 0 }}>
-              Second year at SRMIST studying AI & ML — but really, I spend my time looking for the
+              Second year at SRMIST studying AI & ML. I spend my time looking for the
               awkward gaps where something still takes a human twenty minutes that it absolutely shouldn't.
               DriveScore.ai started because dashcams record but don't think. FlowSense.ai started because
               traffic signals don't know what's in front of them. Most of what I build begins with
@@ -93,22 +91,8 @@ export default function About() {
             </p>
           </motion.div>
 
-          {/* Stat rows */}
-          <motion.div {...fadeUp(0.3)} style={{ marginTop: '40px' }}>
-            {STATS.map((value) => (
-              <div
-                key={value}
-                style={{ padding: '14px 0', borderTop: '1px solid rgba(232,234,240,0.07)' }}
-              >
-                <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '14px', color: 'rgba(232,234,240,0.45)' }}>
-                  {value}
-                </span>
-              </div>
-            ))}
-          </motion.div>
-
           {/* Links */}
-          <motion.div {...fadeUp(0.4)} style={{ display: 'flex', gap: '24px', marginTop: '40px' }}>
+          <motion.div {...fadeUp(0.3)} style={{ display: 'flex', gap: '24px', marginTop: '40px' }}>
             {[
               { label: 'resume', href: 'https://drive.google.com/file/d/1ij1pB0yc3gjMjbB16xhhB1_2HXAMMTFP/view?usp=sharing' },
               { label: 'github', href: 'https://github.com/Vedanthdamn' },
@@ -217,16 +201,21 @@ export default function About() {
               }}>
                 {item.tag}
               </p>
-              <h4 style={{
-                fontFamily: 'Cormorant Garamond, serif',
-                fontSize: '26px',
-                fontWeight: 400,
-                color: 'rgba(232,234,240,0.88)',
-                margin: '0 0 16px 0',
-                lineHeight: 1.15,
-              }}>
-                {item.title}
-              </h4>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', margin: '0 0 16px 0' }}>
+                <span style={{ fontSize: '22px', filter: 'grayscale(100%) brightness(0.7)', lineHeight: 1 }}>
+                  {item.emoji}
+                </span>
+                <h4 style={{
+                  fontFamily: 'Cormorant Garamond, serif',
+                  fontSize: '26px',
+                  fontWeight: 400,
+                  color: 'rgba(232,234,240,0.88)',
+                  margin: 0,
+                  lineHeight: 1.15,
+                }}>
+                  {item.title}
+                </h4>
+              </div>
               <p style={{
                 fontFamily: 'Inter, sans-serif',
                 fontSize: '13.5px',
